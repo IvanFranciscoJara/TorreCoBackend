@@ -1,0 +1,21 @@
+service: backend-torreco
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  memorySize: 512
+  timeout: 15
+  apiGateway:
+    shouldStartNameWithService: true
+  lambdaHashingVersion: 20201221
+  stage: production
+  region: us-east-1
+
+functions:
+  api:
+    handler: lambda.handler
+    events:
+      - http: ANY /{proxy+}
+      - http: ANY /
+      # - https: ANY {proxy+}
+      # - https: ANY
